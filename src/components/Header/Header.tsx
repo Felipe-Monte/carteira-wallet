@@ -10,8 +10,12 @@ import {
   WalletDisconnectButton,
 } from '@solana/wallet-adapter-react-ui';
 
-// Impede erro de hidratação no Next.js
+// Impedir erro de hidratação nos botões
 const DynamicWalletButton = dynamic(() => Promise.resolve(WalletMultiButton), {
+  ssr: false,
+});
+
+const DynamicWalletDisconnectButton  = dynamic(() => Promise.resolve(WalletDisconnectButton), {
   ssr: false,
 });
 
@@ -24,7 +28,7 @@ export default function Header() {
       </h1>
       <nav>
         <DynamicWalletButton />
-        <WalletDisconnectButton />
+        <DynamicWalletDisconnectButton />
         <div>
           <p>$10,00 SOL</p>
         </div>
