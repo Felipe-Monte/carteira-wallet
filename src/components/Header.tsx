@@ -20,6 +20,7 @@ export default function Header() {
       <nav className={styles.nav}>
         <DynamicWalletButton />
         <WalletDisconnectButton />
+        <div>100,00 SOL</div>
       </nav>
     </header>
   );
