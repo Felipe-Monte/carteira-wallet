@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@700&display=swap');
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -5,8 +7,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #172030;
     --foreground: #ededed;
+
+    --type-first: Helvetica, Arial, sans-serif;
+    --type-second: 'Spectral', georgia;
   }
 }
 
@@ -25,9 +30,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--type-first);
 }
 
 a {
