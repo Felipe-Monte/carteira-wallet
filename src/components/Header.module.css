@@ -10,5 +10,10 @@
 
 .nav{
   display: flex;
+  align-items: center;
   gap: 20px;
+}
+
+.sol{
+  font-size: 18px;
 }

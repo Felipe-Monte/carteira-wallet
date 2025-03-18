@@ -1,8 +1,8 @@
 "use client";
+import React from "react";
 import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { useEffect, useState } from "react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import styles from './page.module.css'
@@ -17,10 +17,10 @@ const DynamicWalletButton = dynamic(
 
 export default function Home() {
   const { connected, publicKey } = useWallet();
-  const [solBalance, setSolBalance] = useState<number | null>(null);
-  const [usdcBalance, setUsdcBalance] = useState<number | null>(null);
+  const [solBalance, setSolBalance] = React.useState<number | null>(null);
+  const [usdcBalance, setUsdcBalance] = React.useState<number | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!publicKey) return;
 
     const connection = new Connection(SOLANA_NETWORK);

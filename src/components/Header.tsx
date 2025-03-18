@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 
 import styles from './Header.module.css';
 
@@ -14,13 +15,16 @@ const DynamicWalletButton = dynamic(() => Promise.resolve(WalletMultiButton), {
 });
 
 export default function Header() {
+  
+
+
   return (
     <header className={styles.header}>
-      <h1>My app</h1>
+      <h1>Solana</h1>
       <nav className={styles.nav}>
         <DynamicWalletButton />
         <WalletDisconnectButton />
-        <div>100,00 SOL</div>
+        <div><p className={styles.sol}>100,00 SOL</p></div>
       </nav>
     </header>
   );
