@@ -36,3 +36,14 @@ export const User = styled.div`
     display: block;
   }
 `;
+
+export const WalletButtonsEdit = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .wallet-adapter-button {
+    height: 0;
+    padding: 20px 16px;
+  }
+`;

@@ -1,11 +1,12 @@
 'use client';
 import React from 'react';
 import { RiCoinsFill } from 'react-icons/ri';
-import { BiSolidUserCircle } from "react-icons/bi";
+import { BiSolidUserCircle } from 'react-icons/bi';
 
-import { Container, User } from "./Styles"
+import { WalletButtonsEdit, Container, User } from './Styles';
 
 import dynamic from 'next/dynamic';
+
 import {
   WalletMultiButton,
   WalletDisconnectButton,
@@ -16,9 +17,12 @@ const DynamicWalletButton = dynamic(() => Promise.resolve(WalletMultiButton), {
   ssr: false,
 });
 
-const DynamicWalletDisconnectButton  = dynamic(() => Promise.resolve(WalletDisconnectButton), {
-  ssr: false,
-});
+const DynamicWalletDisconnectButton = dynamic(
+  () => Promise.resolve(WalletDisconnectButton),
+  {
+    ssr: false,
+  },
+);
 
 export default function Header() {
   return (
@@ -27,10 +31,13 @@ export default function Header() {
         <RiCoinsFill size={40} />
       </h1>
       <nav>
-        <DynamicWalletButton />
-        <DynamicWalletDisconnectButton />
+        <WalletButtonsEdit>
+          <DynamicWalletButton />
+          <DynamicWalletDisconnectButton />
+        </WalletButtonsEdit>
+
         <User>
-          <BiSolidUserCircle size={30}/>
+          <BiSolidUserCircle size={30} />
           <span>User</span>
         </User>
       </nav>
