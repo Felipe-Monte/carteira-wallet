@@ -4,6 +4,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { Container, Content } from './Styles';
+import IconSolana from '@/components/IconSolana';
 import Loading from '@/components/Loading/Loading';
 
 const SOLANA_NETWORK = 'https://api.devnet.solana.com';
@@ -66,11 +67,14 @@ export default function Home() {
             <button>Copy Adress</button>
           </div>
           <div>
-            <strong>Saldo SOL:</strong>{' '}
+            <strong> Saldo SOL:</strong>{' '}
             {loading ? (
               <Loading />
             ) : solBalance !== null ? (
-              solBalance.toFixed(4)
+              <>
+                <IconSolana />
+                {solBalance.toFixed(4)}
+              </>
             ) : (
               'Error'
             )}
@@ -80,7 +84,10 @@ export default function Home() {
             {loading ? (
               <Loading />
             ) : usdcBalance !== null ? (
-              usdcBalance.toFixed(2)
+              <>
+                <IconSolana />
+                {usdcBalance.toFixed(4)}
+              </>
             ) : (
               'Error'
             )}
