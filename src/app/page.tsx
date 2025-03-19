@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
@@ -64,6 +63,7 @@ export default function Home() {
         <Content>
           <div>
             <strong>Endereço:</strong> {publicKey.toBase58()}
+            <button>Copy Adress</button>
           </div>
           <div>
             <strong>Saldo SOL:</strong>{' '}

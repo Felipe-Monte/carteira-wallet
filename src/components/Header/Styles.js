@@ -11,12 +11,28 @@ export const Container = styled.header`
   > h1 {
     display: flex;
     align-items: center;
-    gap: 10px;
+
+    cursor: pointer;
   }
 
   > nav {
     display: flex;
     align-items: center;
     gap: 20px;
+  }
+`;
+
+export const User = styled.div`
+  padding: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  cursor: pointer;
+
+  > span {
+    display: block;
   }
 `;

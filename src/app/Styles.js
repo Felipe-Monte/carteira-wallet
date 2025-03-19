@@ -20,4 +20,8 @@ export const Content = styled.div`
   > p {
     margin-bottom: 10px;
   }
+
+  div > button {
+    padding: 5px;
+  }
 `;

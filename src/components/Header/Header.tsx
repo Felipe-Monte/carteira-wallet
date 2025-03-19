@@ -1,8 +1,9 @@
 'use client';
 import React from 'react';
 import { RiCoinsFill } from 'react-icons/ri';
+import { BiSolidUserCircle } from "react-icons/bi";
 
-import { Container } from "./Styles"
+import { Container, User } from "./Styles"
 
 import dynamic from 'next/dynamic';
 import {
@@ -23,15 +24,15 @@ export default function Header() {
   return (
     <Container>
       <h1>
-        <RiCoinsFill size={30} />
-        Wallet
+        <RiCoinsFill size={40} />
       </h1>
       <nav>
         <DynamicWalletButton />
         <DynamicWalletDisconnectButton />
-        <div>
-          <p>$10,00 SOL</p>
-        </div>
+        <User>
+          <BiSolidUserCircle size={30}/>
+          <span>User</span>
+        </User>
       </nav>
     </Container>
   );
