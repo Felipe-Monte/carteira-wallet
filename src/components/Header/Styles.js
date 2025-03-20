@@ -18,6 +18,18 @@ export const FirstSection = styled.div`
   justify-content: space-between;
 
   background-color: #212529;
+
+  > nav {
+    display: flex;
+    gap: 22px;
+  }
+
+  > nav > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
 `;
 
 export const SecondSection = styled.div`
@@ -28,7 +40,16 @@ export const SecondSection = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
+
+  > input {
+    padding: 10px;
+    color: black;
+    border: 1px solid gray;
+    outline: none;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+  }
 `;
 
 export const WalletButtonsEdit = styled.div`

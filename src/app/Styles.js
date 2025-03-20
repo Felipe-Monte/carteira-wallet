@@ -22,6 +22,19 @@ export const Content = styled.div`
   }
 
   div > button {
-    padding: 5px;
+    padding: 10px;
+    background: #512DA8;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover{
+      background-color: #1A1F2E;
+    }
+
+    &:active {
+      background-color: #512DA8;
+    }
   }
 `;
