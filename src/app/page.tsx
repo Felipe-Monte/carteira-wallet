@@ -1,10 +1,18 @@
 'use client';
 import React from 'react';
+import { TbCurrencySolana } from 'react-icons/tb';
+import { AiOutlineDollar } from 'react-icons/ai';
+
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { Container, Content } from './Styles';
-import IconSolana from '@/components/IconSolana';
+
+import {
+  Container,
+  Content,
+  ContainerContentValue,
+  ContentValue,
+} from './Styles';
 import Loading from '@/components/Loading/Loading';
 
 const SOLANA_NETWORK = 'https://api.devnet.solana.com';
@@ -62,35 +70,38 @@ export default function Home() {
 
       {publicKey && (
         <Content>
+          <ContainerContentValue>
+            <ContentValue>
+              <strong> Saldo SOL:</strong>{' '}
+              {loading ? (
+                <Loading />
+              ) : solBalance !== null ? (
+                <>
+                  <TbCurrencySolana size={30} />
+                  {solBalance.toFixed(4)}
+                </>
+              ) : (
+                'Error'
+              )}
+            </ContentValue>
+            <ContentValue>
+              <strong>Saldo USDC:</strong>{' '}
+              {loading ? (
+                <Loading />
+              ) : usdcBalance !== null ? (
+                <>
+                  <AiOutlineDollar size={30} />
+                  {usdcBalance.toFixed(4)}
+                </>
+              ) : (
+                'Error'
+              )}
+            </ContentValue>
+          </ContainerContentValue>
+
           <div>
             <strong>Endereço:</strong> {publicKey.toBase58()}
             <button>Copy Adress</button>
-          </div>
-          <div>
-            <strong> Saldo SOL:</strong>{' '}
-            {loading ? (
-              <Loading />
-            ) : solBalance !== null ? (
-              <>
-                <IconSolana />
-                {solBalance.toFixed(4)}
-              </>
-            ) : (
-              'Error'
-            )}
-          </div>
-          <div>
-            <strong>Saldo USDC:</strong>{' '}
-            {loading ? (
-              <Loading />
-            ) : usdcBalance !== null ? (
-              <>
-                <IconSolana />
-                {usdcBalance.toFixed(4)}
-              </>
-            ) : (
-              'Error'
-            )}
           </div>
         </Content>
       )}
