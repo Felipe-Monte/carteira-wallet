@@ -2,39 +2,33 @@ import styled from 'styled-components';
 
 export const Container = styled.header`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 
-  padding: 10px 20px;
-  background-color: #0a0a0a;
-
-  > h1 {
-    display: flex;
-    align-items: center;
-
-    cursor: pointer;
-  }
-
-  > nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
+  background: black;
 `;
 
-export const User = styled.div`
-  padding: 5px;
+export const FirstSection = styled.div`
+  width: 100%;
+  padding: 20px;
 
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
+  justify-content: space-between;
 
-  cursor: pointer;
+  background-color: #212529;
+`;
 
-  > span {
-    display: block;
-  }
+export const SecondSection = styled.div`
+  width: 100%;
+  padding: 10px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #F8F9FA;
 `;
 
 export const WalletButtonsEdit = styled.div`
