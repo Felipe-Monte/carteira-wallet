@@ -5,9 +5,11 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  height: calc(100vh - 100px);
+  height: 100%;
   text-align: center;
   padding: 20px;
+
+  overflow: none;
 
   > h1 {
     margin-bottom: 10px;
