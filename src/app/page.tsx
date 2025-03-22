@@ -12,6 +12,7 @@ import {
   Content,
   ContainerContentValue,
   ContentValue,
+  ContainerButtonCopy
 } from './Styles';
 
 import Loading from '@/components/Loading/Loading';
@@ -109,11 +110,11 @@ export default function Home() {
             </ContentValue>
           </ContainerContentValue>
 
-          <div>
+          <ContainerButtonCopy>
             <strong>Endereço:</strong>{' '}
             <p ref={copyRef}>{publicKey.toBase58()}</p>
             <button onClick={handleCopy}>Copy Address</button>
-          </div>
+          </ContainerButtonCopy>
         </Content>
       )}
     </Container>
