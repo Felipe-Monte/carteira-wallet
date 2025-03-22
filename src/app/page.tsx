@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
+
 import { TbCurrencySolana } from 'react-icons/tb';
 import { AiOutlineDollar } from 'react-icons/ai';
-
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
@@ -13,15 +13,18 @@ import {
   ContainerContentValue,
   ContentValue,
 } from './Styles';
+
 import Loading from '@/components/Loading/Loading';
 
 const SOLANA_NETWORK = 'https://api.devnet.solana.com';
 
 export default function Home() {
+  const copyRef = React.useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = React.useState(false);
+
   const { connected, publicKey } = useWallet();
   const [solBalance, setSolBalance] = React.useState<number | null>(null);
   const [usdcBalance, setUsdcBalance] = React.useState<number | null>(null);
-  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (!publicKey) return;
@@ -64,6 +67,13 @@ export default function Home() {
     fetchBalances();
   }, [publicKey]);
 
+  function handleCopy() {
+    if (copyRef.current) {
+      const copyWalletAddress = copyRef.current.innerText;
+      console.log(copyWalletAddress)
+    }
+  }
+
   return (
     <Container>
       <h1>Minha Carteira Solana</h1>
@@ -100,8 +110,9 @@ export default function Home() {
           </ContainerContentValue>
 
           <div>
-            <strong>Endereço:</strong> {publicKey.toBase58()}
-            <button>Copy Adress</button>
+            <strong>Endereço:</strong>{' '}
+            <p ref={copyRef}>{publicKey.toBase58()}</p>
+            <button onClick={handleCopy}>Copy Address</button>
           </div>
         </Content>
       )}
