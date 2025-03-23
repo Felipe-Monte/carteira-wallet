@@ -11,9 +11,6 @@ export const useSolanaConnection = () => {
   );
 
   const getBalance = useCallback(async () => {
-    await connection
-      .getBalance(publicKey as PublicKey)
-      .catch((error) => console.log('teste: ', error));
     return await connection.getBalance(publicKey as PublicKey);
   }, []);
 
