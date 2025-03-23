@@ -1,11 +1,10 @@
 'use client';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { TbCurrencySolana } from 'react-icons/tb';
 import { AiOutlineDollar } from 'react-icons/ai';
 
 import { useWallet } from '@solana/wallet-adapter-react';
-import { Connection, PublicKey } from '@solana/web3.js';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { PublicKey } from '@solana/web3.js';
 
 import {
   Container,
@@ -14,52 +13,44 @@ import {
   ContentValue,
 } from './Styles';
 import Loading from '@/components/Loading/Loading';
-
-const SOLANA_NETWORK = 'https://api.devnet.solana.com';
+import { useSolanaConnection } from '@/hooks/useSolanaConnection';
 
 export default function Home() {
-  const { connected, publicKey } = useWallet();
-  const [solBalance, setSolBalance] = React.useState<number | null>(null);
-  const [usdcBalance, setUsdcBalance] = React.useState<number | null>(null);
-  const [loading, setLoading] = React.useState(false);
+  const { publicKey } = useWallet();
+  const [solBalance, setSolBalance] = useState<number | null>(null);
+  const [usdcBalance, setUsdcBalance] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
-    if (!publicKey) return;
+  const { getBalance, getParsedTokenAccountsByOwner } = useSolanaConnection();
 
+  const fetchBalances = async () => {
     setLoading(true);
+    try {
+      // Buscar saldo sol
+      const balance = await getBalance();
+      setSolBalance(balance / 1_000_000_000);
+      // Buscar saldo usd
+      const tokens = await getParsedTokenAccountsByOwner();
+      const USDC_MINT = new PublicKey(
+        process.env.NEXT_PUBLIC_SOLANA_KEY as string,
+      );
 
-    const connection = new Connection(SOLANA_NETWORK);
+      const usdcAccount = tokens.value.find(
+        (t) => t.account.data.parsed.info.mint === USDC_MINT?.toBase58(),
+      );
 
-    async function fetchBalances() {
-      try {
-        // Buscar saldo sol
-        const balance = await connection.getBalance(publicKey as PublicKey);
-        setSolBalance(balance / 1_000_000_000);
-
-        // Buscar saldo usd
-        const USDC_MINT = new PublicKey(
-          'EwHyD1eVxGkYPzZRMYEM2qfxuFUokFihh2owwbfL7YNr',
-        );
-
-        const tokens = await connection.getParsedTokenAccountsByOwner(
-          publicKey as PublicKey,
-          { programId: TOKEN_PROGRAM_ID },
-        );
-
-        const usdcAccount = tokens.value.find(
-          (t) => t.account.data.parsed.info.mint === USDC_MINT.toBase58(),
-        );
-
-        setUsdcBalance(
-          usdcAccount
-            ? usdcAccount.account.data.parsed.info.tokenAmount.uiAmount
-            : 0,
-        );
-      } catch (error) {
-        console.error('Error ao buscar saldo', error);
-      }
+      setUsdcBalance(
+        usdcAccount?.account?.data?.parsed?.info?.tokenAmount?.uiAmount || 0,
+      );
+    } catch (error) {
+      console.error('Error ao buscar saldo', error);
+    } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    if (!publicKey) return;
 
     fetchBalances();
   }, [publicKey]);
@@ -100,7 +91,7 @@ export default function Home() {
           </ContainerContentValue>
 
           <div>
-            <strong>Endereço:</strong> {publicKey.toBase58()}
+            <strong>Endereço:</strong> {publicKey?.toBase58()}
             <button>Copy Adress</button>
           </div>
         </Content>
