@@ -1,14 +1,21 @@
-"use client"; 
-import { ReactNode, useMemo } from "react";
-import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
-import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import { clusterApiUrl } from "@solana/web3.js";
+'use client';
+import { ReactNode } from 'react';
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from '@solana/wallet-adapter-react';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
+import { clusterApiUrl } from '@solana/web3.js';
 
-import "@solana/wallet-adapter-react-ui/styles.css"; 
+import '@solana/wallet-adapter-react-ui/styles.css';
 
-export const WalletContextProvider = ({ children }: { children: ReactNode }) => {
+export const WalletContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   // Configura a rede Solana (pode ser "mainnet-beta" para produção)
-  const endpoint = clusterApiUrl("devnet");
+  const endpoint = clusterApiUrl('devnet');
 
   return (
     <ConnectionProvider endpoint={endpoint}>

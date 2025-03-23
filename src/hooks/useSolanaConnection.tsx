@@ -12,16 +12,17 @@ export const useSolanaConnection = () => {
 
   const getBalance = useCallback(async () => {
     return await connection.getBalance(publicKey as PublicKey);
-  }, []);
+  }, [publicKey]);
 
   const getParsedTokenAccountsByOwner = useCallback(async () => {
     return await connection.getParsedTokenAccountsByOwner(
       publicKey as PublicKey,
       { programId: TOKEN_PROGRAM_ID },
     );
-  }, []);
+  }, [publicKey]);
 
   return {
+    publicKey,
     getBalance,
     getParsedTokenAccountsByOwner,
   };

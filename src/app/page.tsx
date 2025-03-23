@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { TbCurrencySolana } from 'react-icons/tb';
 import { AiOutlineDollar } from 'react-icons/ai';
 
-import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 
 import {
@@ -16,12 +15,12 @@ import Loading from '@/components/Loading/Loading';
 import { useSolanaConnection } from '@/hooks/useSolanaConnection';
 
 export default function Home() {
-  const { publicKey } = useWallet();
   const [solBalance, setSolBalance] = useState<number | null>(null);
   const [usdcBalance, setUsdcBalance] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { getBalance, getParsedTokenAccountsByOwner } = useSolanaConnection();
+  const { publicKey, getBalance, getParsedTokenAccountsByOwner } =
+    useSolanaConnection();
 
   const fetchBalances = async () => {
     setLoading(true);
