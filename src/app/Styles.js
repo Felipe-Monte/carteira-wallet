@@ -23,12 +23,14 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 20px;
 
-  > p {
-    margin-bottom: 10px;
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   div > button {
-    margin-left: 10px;
     padding: 10px;
     background: #512da8;
     border: none;

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { TbCurrencySolana } from 'react-icons/tb';
 import { AiOutlineDollar } from 'react-icons/ai';
 
@@ -15,6 +15,8 @@ import Loading from '@/components/Loading/Loading';
 import { useSolanaConnection } from '@/hooks/useSolanaConnection';
 
 export default function Home() {
+  const copyRef = useRef<HTMLParagraphElement>(null);
+
   const [solBalance, setSolBalance] = useState<number | null>(null);
   const [usdcBalance, setUsdcBalance] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
@@ -54,6 +56,18 @@ export default function Home() {
     fetchBalances();
   }, [publicKey]);
 
+  const handleCopy = async () => {
+    if (copyRef.current) {
+      try {
+        const textCopy = copyRef.current.textContent ?? 'Chave vazia';
+        await navigator.clipboard.writeText(textCopy);
+        alert('Chave copiada!');
+      } catch (err) {
+        console.error('Error ao copiar chave', err);
+      }
+    }
+  };
+
   return (
     <Container>
       <h1>Minha Carteira Solana</h1>
@@ -90,8 +104,9 @@ export default function Home() {
           </ContainerContentValue>
 
           <div>
-            <strong>Endereço:</strong> {publicKey?.toBase58()}
-            <button>Copy Adress</button>
+            <strong>Endereço:</strong>
+            <p ref={copyRef}>{publicKey?.toBase58()}</p>
+            <button onClick={handleCopy}>Copy Adress</button>
           </div>
         </Content>
       )}
